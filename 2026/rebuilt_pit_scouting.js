@@ -27,9 +27,9 @@ var config_data = `
         "w": "West Coast/Tank<br>",
         "b": "Butterfly/Grashopper<br>",
         "m": "Mechanum<br>",
-        "o": "Other"
+        "k": "Kraken"
       },
-      "defaultValue": "o"
+      "defaultValue": "s"
     },
     { "name": "Other Drivetrain",
       "code": "odt",
