@@ -77,6 +77,15 @@ var config_data = `
       "expectedMax": 5,
       "shape": "circle 5 black red true"
     },
+    { "name": "Pick-Up Location",
+      "code": "pul",
+      "type": "clickable_image",
+      "filename": "2026/half_field.png",
+      "dimensions": "7 10",
+      "allowableResponses": "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 29 30 31 32 36 37 38 39 43 44 45 46 50 51 52 53 57 58 59 60 64 65 66 67",
+      "expectedMax": 10000,
+      "shape": "circle 5 black blue true"
+    },
     { "name": "Fuel Scored",
       "code": "afs",
       "expectedMax": 32,
