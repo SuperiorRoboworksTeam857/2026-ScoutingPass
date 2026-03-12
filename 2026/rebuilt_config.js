@@ -5,6 +5,12 @@ var config_data = `
   "page_title": "REBUILT - Superior Roboworks",
   "checkboxAs": "10",
   "prematch": [
+    { "name": "Team #",
+      "code": "t",
+      "type": "team",
+      "min": 1,
+      "max": 99999
+    },
     { "name": "Scouter Initials",
       "code": "s",
       "type": "scouter",
@@ -49,12 +55,8 @@ var config_data = `
       },
       "required": "true"
     },
-    { "name": "Team #",
-      "code": "t",
-      "type": "team",
-      "min": 1,
-      "max": 99999
-    },
+    
+    
     { "name": "Auto Start Location",
       "code": "as",
       "type": "clickable_image",
