@@ -2,7 +2,7 @@ var config_data = `
 {
   "dataFormat": "tsv",
   "title": "Scouting PASS 2026",
-  "page_title": "REBUILT",
+  "page_title": "REBUILT - Superior Roboworks",
   "pitConfig": "true",
   "prematch": [
     { "name": "Team Number",
