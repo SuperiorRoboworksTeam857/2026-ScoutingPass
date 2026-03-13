@@ -27,9 +27,9 @@ var config_data = `
         "w": "West Coast/Tank<br>",
         "b": "Butterfly/Grashopper<br>",
         "m": "Mechanum<br>",
-        "k": "Kraken"
+        "o": "Other"
       },
-      "defaultValue": "s"
+      "defaultValue": "o"
     },
     { "name": "Other Drivetrain",
       "code": "odt",
@@ -57,9 +57,9 @@ var config_data = `
         "n": "Neo<br>",
         "f": "Falcon<br>",
         "c": "CIM<br>",
-        "x": "Other<br>"
+        "k": "Kraken<br>"
       },
-      "defaultValue":"x"
+      "defaultValue":"n"
     },
     { "name": "# of Batteries",
       "code": "nob",
