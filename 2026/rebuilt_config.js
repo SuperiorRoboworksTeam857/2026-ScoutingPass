@@ -5,7 +5,7 @@ var config_data = `
   "page_title": "REBUILT - Superior Roboworks",
   "checkboxAs": "10",
   "prematch": [
-    { "name": "Team #",
+    { "name": "Team #"
       "code": "t",
       "type": "team",
       "min": 1,
@@ -94,8 +94,8 @@ var config_data = `
       "code": "ac",
       "type": "radio",
       "choices": {
-        "c": "Climbed<br>",
-        "a": "Attempted<br>",
+        "1": "Climbed<br>",
+        "0": "Attempted<br>",
         "x": "Not Attempted"
       },
       "defaultValue": "x"
@@ -165,7 +165,7 @@ var config_data = `
         "1": "Level 1<br>",
         "2": "Level 2<br>",
         "3": "Level 3<br>",
-        "a": "Attempted<br>",
+        "0": "Attempted<br>",
         "x": "Not Attempted"
       },
       "defaultValue": "x"
@@ -176,9 +176,9 @@ var config_data = `
       "code": "ds",
       "type": "radio",
       "choices": {
-        "n": "Not Effective<br>",
-        "a": "Average<br>",
-        "v": "Very Effective<br>",
+        "0": "Not Effective<br>",
+        "1": "Average<br>",
+        "2": "Very Effective<br>",
         "x": "Not Observed"
       },
       "defaultValue": "x"
@@ -187,10 +187,10 @@ var config_data = `
       "code": "dr",
       "type": "radio",
       "choices": {
-        "b": "Below Average<br>",
-        "a": "Average<br>",
-        "g": "Good<br>",
-        "e": "Excellent<br>",
+        "0": "Below Average<br>",
+        "1": "Average<br>",
+        "2": "Good<br>",
+        "3": "Excellent<br>",
         "x": "Did not play defense"
       },
       "defaultValue": "x"
@@ -248,11 +248,22 @@ var config_data = `
       },
       "defaultValue":"3"
     },
+      { "name": "Unload Speed",
+      "code": "us",
+      "type": "radio",
+      "choices": {
+        "1": "1 (very slow)<br>",
+        "2": "2<br>",
+        "3": "3<br>",
+        "4": "3 (almost instant)"
+      },
+      "defaultValue":"3"
+    },
     { "name": "Comments",
       "code": "co",
       "type": "text",
       "size": 15,
-      "maxSize": 55
+      "maxSize": 500
     }
   ]
 }`;
