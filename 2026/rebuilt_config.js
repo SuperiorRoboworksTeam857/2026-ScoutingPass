@@ -5,7 +5,7 @@ var config_data = `
   "page_title": "REBUILT - Superior Roboworks",
   "checkboxAs": "10",
   "prematch": [
-    { "name": "Team #"
+    { "name": "Team #",
       "code": "t",
       "type": "team",
       "min": 1,
@@ -248,8 +248,8 @@ var config_data = `
       },
       "defaultValue":"3"
     },
-      { "name": "Unload Speed",
-      "code": "us",
+      { "name": "Shooter Rate",
+      "code": "sr",
       "type": "radio",
       "choices": {
         "1": "1 (very slow)<br>",
