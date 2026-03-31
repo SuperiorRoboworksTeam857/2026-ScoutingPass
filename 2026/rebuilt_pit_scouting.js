@@ -44,7 +44,7 @@ var config_data = `
         "1": "1 Ball Wide<br>",
         "2": "2 Balls Wide<br>",
         "3": "3 Balls Wide<br>",
-        "4": "4 Balls Wide",
+        "4": "4 Balls Wide"
       },
       "defaultValue":"1"
     },
