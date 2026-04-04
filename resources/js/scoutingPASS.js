@@ -604,7 +604,9 @@ function addRadio(table, idx, name, data) {
     keys = Object.keys(data.choices);
     keys.forEach(c => {
       var inp = document.createElement("input");
-      inp.setAttribute("id", "input_" + data.code + "_" + c);
+      // calculate the inputOId in a separate variable
+      let inputId = "input_" + data.code + "_" + c;
+      inp.setAttribute("id", inputId);
       inp.setAttribute("type", "radio");
       if (enableGoogleSheets && data.hasOwnProperty('gsCol')) {
         inp.setAttribute("name", data.gsCol);
@@ -616,7 +618,13 @@ function addRadio(table, idx, name, data) {
         inp.setAttribute("checked", "");
       }
       cell2.appendChild(inp);
-      cell2.innerHTML += data.choices[c];
+
+      // DJR - code change
+      // implement label so we can change these dynamically
+      let label = document.createElement("label");
+      label.setAttribute("for", inputId);
+      label.innerHTML = data.choices[c];
+      cell2.appendChild(label);
     });
   }
   var inp = document.createElement("input");
@@ -1298,18 +1306,29 @@ function updateMatchStart(event) {
   if ((getCurrentMatch() == "") ||
     (!teams)) {
     console.log("No match or team data.");
+    resetRobotPositionLabels();
     return;
   }
-  if (event.target.id.startsWith("input_r")) {
-    document.getElementById("input_t").value = getCurrentTeamNumberFromRobot().replace("frc", "");
-    onTeamnameChange();
-  }
+  updateRobotPositionLabels(document.getElementById("input_m").value);
   if (event.target.id == "input_m") {
     if (getRobot() != "" && typeof getRobot()) {
       document.getElementById("input_t").value = getCurrentTeamNumberFromRobot().replace("frc", "");
       onTeamnameChange();
     }
   }
+  if (event.target.id.startsWith("input_r")) {
+    document.getElementById("input_t").value = getCurrentTeamNumberFromRobot().replace("frc", "");
+    onTeamnameChange();
+  }
+}
+
+function changeInitialNextButton(){
+  let topNextButton = document.getElementById("nextButton1");
+  let bottomNextButton = document.getElementById("nextButton2");
+  let teamNumber = document.getElementById("input_t").value;
+
+  bottomNextButton.value = "Start with Team " + teamNumber;
+  topNextButton.value = "Start with Team " + teamNumber;
 }
 
 function onTeamnameChange(event) {
@@ -1320,6 +1339,7 @@ function onTeamnameChange(event) {
   } else {
     teamLabel.innerText = "";
   }
+  changeInitialNextButton();
 }
 
 /**
@@ -1472,6 +1492,7 @@ window.onload = function () {
   let ret = configure();
   if (ret != -1) {
     let ece = document.getElementById("input_e");
+    let team = document.getElementById("input_t");
     let ec = null;
     if (ece != null) {
       ec = ece.value;
@@ -1479,24 +1500,121 @@ window.onload = function () {
     if (ec != null) {
       getTeams(ec);
       getSchedule(ec);
+      updateStatusPanel();
     }
     this.drawFields();
     if (enableGoogleSheets) {
       console.log("Enabling Google Sheets.");
       setUpGoogleSheets();
     }
+
+    ece.addEventListener('change', (ev) => {
+      let newEventKey = ev.target.value;
+      if(newEventKey != null && newEventKey != ""){
+        getTeams(newEventKey);
+        getSchedule(newEventKey);
+        setTimeout(() => {
+          updateMatchStart(ev);
+        }, 1000);
+        updateStatusPanel();
+      }
+
+      
+    });
+
+    team.addEventListener('change', (ev) => {
+      changeInitialNextButton(ev);
+    });
   }
+
+
 };
 
+// DJR - 857 defined functions
 
+function resetRobotPositionLabels(){
+  let rp_r1_label = document.querySelector("label[for='input_r_r1']");
+  let rp_r2_label = document.querySelector("label[for='input_r_r2']");
+  let rp_r3_label = document.querySelector("label[for='input_r_r3']");
+  let rp_b1_label = document.querySelector("label[for='input_r_b1']");
+  let rp_b2_label = document.querySelector("label[for='input_r_b2']");
+  let rp_b3_label = document.querySelector("label[for='input_r_b3']");
 
+  rp_r1_label.innerHTML = `Red-1<br/>`;
+  rp_r2_label.innerHTML = `Red-2<br/>`;
+  rp_r3_label.innerHTML = `Red-3<br/>`;
+  rp_b1_label.innerHTML = `Blue-1<br/>`;
+  rp_b2_label.innerHTML = `Blue-2<br/>`;
+  rp_b3_label.innerHTML = `Blue-3`;
+}
 
+function updateRobotPositionLabels(matchNum){
+  let rp_r1 = document.getElementById("input_r_r1");
+  let rp_r2 = document.getElementById("input_r_r2");
+  let rp_r3 = document.getElementById("input_r_r3");
+  let rp_b1 = document.getElementById("input_r_b1");
+  let rp_b2 = document.getElementById("input_r_b2");
+  let rp_b3 = document.getElementById("input_r_b3");
 
+  let rp_r1_label = document.querySelector("label[for='input_r_r1']");
+  let rp_r2_label = document.querySelector("label[for='input_r_r2']");
+  let rp_r3_label = document.querySelector("label[for='input_r_r3']");
+  let rp_b1_label = document.querySelector("label[for='input_r_b1']");
+  let rp_b2_label = document.querySelector("label[for='input_r_b2']");
+  let rp_b3_label = document.querySelector("label[for='input_r_b3']");
 
+  if(schedule == null) {
+    resetRobotPositionLabels();
+    return;
+  };
 
+  let selectedMatch = schedule.find(m => m["match_number"] == matchNum);
+  if(selectedMatch == null) {
+    resetRobotPositionLabels();
+    return;
+  };
 
+  let robot_r1 = selectedMatch["alliances"]["red"]["team_keys"][0].substring(3);
+  let robot_r2 = selectedMatch["alliances"]["red"]["team_keys"][1].substring(3);
+  let robot_r3 = selectedMatch["alliances"]["red"]["team_keys"][2].substring(3);
+  let robot_b1 = selectedMatch["alliances"]["blue"]["team_keys"][0].substring(3);
+  let robot_b2 = selectedMatch["alliances"]["blue"]["team_keys"][1].substring(3);
+  let robot_b3 = selectedMatch["alliances"]["blue"]["team_keys"][2].substring(3);
 
+  rp_r1_label.innerHTML = `Red-1 - <span style="color: pink;">(${robot_r1})</span><br/>`;
+  rp_r2_label.innerHTML = `Red-2 - <span style="color: pink;">(${robot_r2})</span><br/>`;
+  rp_r3_label.innerHTML = `Red-3 - <span style="color: pink;">(${robot_r3})</span><br/>`;
+  rp_b1_label.innerHTML = `Blue-1 - <span style="color: lightblue;">(${robot_b1})</span><br/>`;
+  rp_b2_label.innerHTML = `Blue-2 - <span style="color: lightblue;">(${robot_b2})</span><br/>`;
+  rp_b3_label.innerHTML = `Blue-3 - <span style="color: lightblue;">(${robot_b3})</span>`;
+}
 
+function updateStatusPanel(){
+  let statusPanel = document.getElementById("status-panel");
+  let event = document.getElementById("status-panel-event");
+
+  let scheduleElem = document.getElementById("status-panel-schedule");
+  let teamElem = document.getElementById("status-panel-teams");
+
+  event.innerHTML = document.getElementById("input_e").value != "" ? `${document.getElementById("input_e").value}` : "No Event";
+
+  // if no schedule, then show "no schedule" and unavailable
+  if(schedule == null || !schedule || schedule.length == 0){
+    scheduleElem.innerHTML = "No schedule";
+    scheduleElem.classList = "unavailable";
+  }else{
+    scheduleElem.innerHTML = `${schedule.length} matches`;
+    scheduleElem.classList = "available";
+  }
+
+  if(teams == null || !teams || teams.length == 0){
+    teamElem.innerHTML = "No teams";
+    teamElem.classList = "unavailable";
+  }else{
+    teamElem.innerHTML = `${teams.length} teams`;
+    teamElem.classList = "available";
+  }
+}
 
 
 

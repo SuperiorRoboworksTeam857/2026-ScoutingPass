@@ -244,3 +244,32 @@ input {
     font-family:'Lucida Console', 'monospace';
     text-align: justify;
 }
+
+/* 
+    CUSTOM CSS FOR THE STATUS PANEL IN THE LOWER LEFT
+*/
+
+.srw_status-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: #d8fcff;
+    color: black;
+    padding: 10px;
+    border-radius: 0px 4px 0px 0px;
+    font-size: 12px;
+}
+
+.srw_status-panel .available {
+    background-color: #42B333;
+    padding: 5px;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+.srw_status-panel .unavailable {
+    background-color: #b33339;
+    padding: 5px;
+    border-radius: 4px;
+    margin-left: 5px;
+
+}

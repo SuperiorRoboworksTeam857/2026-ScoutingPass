@@ -5,34 +5,10 @@ var config_data = `
   "page_title": "REBUILT - Superior Roboworks",
   "checkboxAs": "10",
   "prematch": [
-    { "name": "Team #",
-      "code": "t",
-      "type": "team",
-      "min": 1,
-      "max": 99999
-    },
-    { "name": "Scouter Initials",
-      "code": "s",
-      "type": "scouter",
-      "size": 5,
-      "maxSize": 5,
-      "required": "true"
-    },
     { "name": "Event",
       "code": "e",
       "type": "event",
       "defaultValue": "2026miesc",
-      "required": "true"
-    },
-    { "name": "Match Level",
-      "code": "l",
-      "type": "level",
-      "choices": {
-        "qm": "Quals<br>",
-        "sf": "Semifinals<br>",
-        "f": "Finals"
-      },
-      "defaultValue": "qm",
       "required": "true"
     },
     { "name": "Match #",
@@ -46,13 +22,37 @@ var config_data = `
       "code": "r",
       "type": "robot",
       "choices": {
-        "r1": "Red-1",
+        "r1": "Red-1<br>",
+        "r2": "Red-2<br>",
+        "r3": "Red-3<br>",
         "b1": "Blue-1<br>",
-        "r2": "Red-2",
         "b2": "Blue-2<br>",
-        "r3": "Red-3",
         "b3": "Blue-3"
       },
+      "required": "true"
+    },
+    { "name": "Team #",
+      "code": "t",
+      "type": "team",
+      "min": 1,
+      "max": 99999
+    },
+    { "name": "Scouter Initials",
+      "code": "s",
+      "type": "scouter",
+      "size": 5,
+      "maxSize": 5,
+      "required": "true"
+    },
+    { "name": "Match Level",
+      "code": "l",
+      "type": "level",
+      "choices": {
+        "qm": "Quals<br>",
+        "sf": "Semifinals<br>",
+        "f": "Finals"
+      },
+      "defaultValue": "qm",
       "required": "true"
     },
     { "name": "Auto Start Location",
