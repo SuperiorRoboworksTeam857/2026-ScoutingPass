@@ -5,33 +5,7 @@ var config_data = `
   "page_title": "REBUILT - Superior Roboworks",
   "checkboxAs": "10",
   "prematch": [
-    { "name": "Event",
-      "code": "e",
-      "type": "event",
-      "defaultValue": "2026miesc",
-      "required": "true"
-    },
-    { "name": "Match #",
-      "code": "m",
-      "type": "match",
-      "min": 1,
-      "max": 150,
-      "required": "true"
-    },
-    { "name": "Robot",
-      "code": "r",
-      "type": "robot",
-      "choices": {
-        "r1": "Red-1<br>",
-        "r2": "Red-2<br>",
-        "r3": "Red-3<br>",
-        "b1": "Blue-1<br>",
-        "b2": "Blue-2<br>",
-        "b3": "Blue-3"
-      },
-      "required": "true"
-    },
-    { "name": "Team #",
+  { "name": "Team #",
       "code": "t",
       "type": "team",
       "min": 1,
@@ -55,6 +29,35 @@ var config_data = `
       "defaultValue": "qm",
       "required": "true"
     },
+    { "name": "Match #",
+      "code": "m",
+      "type": "match",
+      "min": 1,
+      "max": 150,
+      "required": "true"
+    },
+    { "name": "Robot",
+      "code": "r",
+      "type": "robot",
+      "choices": {
+        "r1": "Red-1<br>",
+        "r2": "Red-2<br>",
+        "r3": "Red-3<br>",
+        "b1": "Blue-1<br>",
+        "b2": "Blue-2<br>",
+        "b3": "Blue-3"
+      },
+      "required": "true"
+    },
+    { "name": "Event",
+      "code": "e",
+      "type": "event",
+      "defaultValue": "2026miesc",
+      "required": "true"
+    },
+    
+
+    
     { "name": "Auto Start Location",
       "code": "as",
       "type": "clickable_image",
